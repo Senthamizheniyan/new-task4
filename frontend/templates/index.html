@@ -1,0 +1,308 @@
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="container mt-5" style="margin-left:20px">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" data-bs-toggle="tab" href="#content1" 
+                    role="tab">Form Creation Tab</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#content2" role="tab">Alignment </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#content3"  role="tab">Empty </a>
+            </li>
+
+        </ul>
+
+        <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="content1" role="tabpanel">
+                <div id="formsContainer">
+                    <form class="dynamic-form" id="form1">
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Form 1</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control size" placeholder="form1">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Redirect path</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control size" placeholder="form1 Redirect Path">
+                                    <button class="btn btn-primary ms-5 add-form" type="button">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12 dynamic-field">
+                                <label class="form-label">Field name 1</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control size" name="field1[]"
+                                        placeholder="form1 Field name 1">
+                                    <select class="form-select ms-1" name="selection1[]">
+                                        <option value="varchar">Varchar Field</option>
+                                        <option value="number">Number Field</option>
+                                       
+                                        <option value="option3">Password</option>
+                                    <option value="option4">Select box</option>
+                                    <option value="option5">Number Field</option>
+                                    <option value="option6">Email</option>
+                                    <option value="option7">Radio Button</option>
+                                    <option value="option8">Calc field</option>
+                                    <option value="option9">Check Box </option>
+                                    <option value="option10">image</option>
+                                    <option value="option11">logo</option>
+                                    <option value="option12">Comment box</option>
+                                    <option value="option13">Quantity box</option>
+                                    <option value="option14">Button </option>
+                                    <option value="option15">Tables</option>
+                                    <option value="option16">Video Field</option>
+                                    <option value="option17">File Field</option>
+                                    <option value="option18">Audio Field</option>
+                                    </select>
+                                    <div>
+                                       
+                                        <label>
+                                          <input type="checkbox" class="checkbox" value="1" name="fooby[1][]" />Required</label>
+                                        <label>
+                                          <input type="checkbox" class="checkbox" value="1" name="fooby[1][]" />Readable</label>
+                                        
+                                      </div>
+                                    <button class="btn btn-primary ms-5 add-field" type="button">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <!-- Submit, Cancel, Reset buttons -->
+                        <button id="submitBtn"
+
+class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary ms-2 cancel-form">Cancel</button>
+                        <button type="reset" class="btn btn-danger ms-2">Reset</button>
+</div>
+            </div>
+            <div class="tab-pane fade" id="content2">
+                <h3>Content for Tab 2</h3>
+            </div>
+
+            <div class="tab-pane fade" id="content3">
+                <h3>Content for Tab 3</h3>
+                <p>empty</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var formCounter = 1;
+            function generateFormHtml(formId) {
+                return `
+                    <form class="dynamic-form" id="${formId}">
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="${formId}-forms" class="form-label">${formId}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control size" id="${formId}-forms" placeholder="${formId}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="${formId}-Redirect" class="form-label">${formId} - Redirect path</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control size" id="${formId}-Redirect" placeholder="${formId} Redirect Path">
+                                    <button class="btn btn-primary ms-5 add-form" type="button">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-12 dynamic-field">
+                                
+                                <label >Field name 1</label><label style="padding-left :29%;">Select option</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control size" id="${formId}-field" name="${formId}-field1[]" placeholder="${formId} Field name 1 ">
+                                    <select class="form-select ms-1" name="${formId}-selection1[]">
+                                        <option value="varchar">Varchar Field</option>
+                                        <option value="number">Number Field</option>
+                                        
+                                    <option value="option3">Password</option>
+                                    <option value="option4">Select box</option>
+                                    <option value="option5">Number Field</option>
+                                    <option value="option6">Email</option>
+                                    <option value="option7">Radio Button</option>
+                                    <option value="option8">Calc field</option>
+                                    <option value="option9">Check Box </option>
+                                    <option value="option10">image</option>
+                                    <option value="option11">logo</option>
+                                    <option value="option12">Comment box</option>
+                                    <option value="option13">Quantity box</option>
+                                    <option value="option14">Button </option>
+                                    <option value="option15">Tables</option>
+                                    <option value="option16">Video Field</option>
+                                    <option value="option17">File Field</option>
+                                    <option value="option18">Audio Field</option>
+                                        
+                                    </select>
+                                    
+                                    <div>
+                           
+                                        <label><input type="checkbox" class="checkbox-${formId}" value="1" name="${formId}[1][]" />Required</label>
+                                        <label><input type="checkbox" class="checkbox-${formId}" value="1" name="${formId}[1][]" />Readable</label>
+                                    </div>
+                                            
+                                    
+                                    
+                                
+                                        
+                                    <button class="btn btn-primary ms-5 add-field" type="button">+</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                `;
+            }
+            
+
+            function addForm() {
+                var newFormId = getNextFormNumber();
+                var newFormHtml = generateFormHtml(newFormId);
+                var newForm = $(newFormHtml);
+                newForm.find('.add-form').removeClass('add-form').addClass('remove-form').html('-');
+                newForm.find('input[type="text"]').val('');
+                newForm.find('.form-label').each(function (index) {
+                    var labelType = index === 0 ? '' : (index === 1 ? 'Redirect path' : 'Field name');
+                    $(this).text(`${newFormId}  ${labelType} `);
+                });
+                
+                $('#formsContainer').append(newForm);
+            }
+
+            function removeForm() {
+                $(this).closest(".dynamic-form").remove();
+            }
+            $("#formsContainer").on("click", ".add-form", addForm);
+            $("#formsContainer").on("click", ".remove-form", removeForm);
+            function addField(formId, fieldCounter) {
+                var newFieldId = "field" + fieldCounter;
+                var fieldName = `${formId}-field${fieldCounter}`;
+            
+                // Check if the field name already exists
+                while ($(`[name="${fieldName}[]"]`).length > 0) {
+                    fieldCounter++;
+                    newFieldId = "field" + fieldCounter;
+                    fieldName = `${formId}-field${fieldCounter}`;
+                }
+                var checkboxName = `${formId}-checkbox-${fieldCounter}`; // Define the checkbox name
+                
+
+                var newField = `
+                    <div class="row mb-3">
+                        <div class="col-md-12 dynamic-field">
+                            <label for="${newFieldId}" class="form-label">Field name ${fieldCounter} </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control size" id="${formId}-${newFieldId}" name="${formId}-field${fieldCounter}[]" placeholder="${formId} Field name ${fieldCounter}">
+                                <select class="form-select ms-1" name="${formId}-selection${fieldCounter}[]">
+                                    <option value="varchar">Varchar Field</option>
+                                    <option value="number">Number Field</option>
+                                    
+                                    <option value="option3">Password</option>
+                                    <option value="option4">Select box</option>
+                                    <option value="option5">Number Field</option>
+                                    <option value="option6">Email</option>
+                                    <option value="option7">Radio Button</option>
+                                    <option value="option8">Calc field</option>
+                                    <option value="option9">Check Box </option>
+                                    <option value="option10">image</option>
+                                    <option value="option11">logo</option>
+                                    <option value="option12">Comment box</option>
+                                    <option value="option13">Quantity box</option>
+                                    <option value="option14">Button </option>
+                                    <option value="option15">Tables</option>
+                                    <option value="option16">Video Field</option>
+                                    <option value="option17">File Field</option>
+                                    <option value="option18">Audio Field</option>
+                                    
+                                    
+                                    
+                                </select>
+                                <div>
+                                    <label><input type="checkbox" class="checkbox-${formId}" value="1" name="${checkboxName}" />Required</label>
+                                    <label><input type="checkbox" class="checkbox-${formId}" value="1" name="${checkboxName}" />Readable</label>
+                                </div>
+                                
+                                <button class="btn btn-danger ms-5 remove-field" name="removebutton" type="button">-</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $('#' + formId).append(newField);
+            }
+            
+
+            function removeField() {
+                $(this).closest(".row").remove();
+            }
+
+            $("#formsContainer").on("click", ".add-field", function () {
+                var formId = $(this).closest('.dynamic-form').attr('id');
+                var fieldCounter = $('#' + formId).find('.dynamic-field').length + 1;
+                addField(formId, fieldCounter);
+            });
+
+            $("#formsContainer").on("click", ".remove-field", removeField);
+
+            function getNextFormNumber() {
+                var existingFormIds = $('.dynamic-form').map(function () {
+                    return parseInt(this.id.replace('form', ''), 10);
+                }).get();
+
+                if (existingFormIds.length === 0) {
+                    return 'form2';
+                }
+
+                var maxFormId = Math.max.apply(null, existingFormIds);
+                return 'form' + (maxFormId + 1);
+            }
+           
+
+            
+        });
+        $('#submitBtn').on('click', function () {
+            // Set checkbox values to 0 for unselected and 1 for selected
+            $('.checkbox').each(function () {
+                $(this).val(this.checked ? 1 : 0);
+            });
+            alert("Thank you for submitting!");
+        });
+
+    </script>
+
+</body>
+
+</html>
+
+{% endblock %}
